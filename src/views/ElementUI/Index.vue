@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h1>目录</h1>
-    <router-link to="/elementui" class="link-item">Element-UI</router-link>
-    <router-link to="/echarts" class="link-item">Echarts</router-link>
+   ElementUI
   </div>
 </template>
 <script type = 'text/javascript'>
@@ -25,7 +23,5 @@
   }
 </script>
 <style lang='scss' scoped>
-.link-item {
-  display: block;
-}
+
 </style>
