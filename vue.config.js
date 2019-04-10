@@ -8,7 +8,7 @@ module.exports = {
     loaderOptions: {
       sass: {
        //向所有的sass文件注入 theme.scss
-        data: `@import '~@/assets/scss/theme.scss';`
+        data: `@import '~@/assets/style/theme.scss';`
       }
     }
   },

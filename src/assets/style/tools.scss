@@ -1,0 +1,233 @@
+
+/// 将元素垂直(水平)居中 (transform 版本)
+///
+/// @param {String} $inner-selector ['.inner'] - 直接子选择器名称
+/// @param {Bool} $horizontal [true] - 是否水平居中
+///
+/// @example scss - 使用
+///   .element {
+///      @include center-tl;
+///   }
+///
+/// @example css - 输出
+///   .element {
+///       position: relative;
+///   }
+///
+///   .element > .inner {
+///       position: absolute;
+///       top: 50%;
+///       left: 50%;
+///       transform: translate(-50%, -50%);
+///   }
+///
+@mixin center-tl(
+    $inner-selector: '.inner',
+    $horizontal: true
+) {
+
+    position: relative;
+
+    & > #{$inner-selector} {
+        position: absolute;
+        top: 50%;
+        $translate-val: translateY(-50%);
+
+        @if $horizontal {
+            left: 50%;
+            $translate-val: translate(-50%, -50%);
+        }
+
+        transform: $translate-val;
+    }
+
+}
+
+/// 将元素垂直(水平)居中 (table 版本)
+///
+/// @param {String} $inner-selector ['.inner'] - 直接子选择器名称
+/// @param {Bool} $horizontal [true] - 是否水平居中
+///
+/// @example scss - 使用
+///   .element {
+///     @include center-td;
+///   }
+///
+/// @example css - 输出
+///   .element {
+///       text-align: center;
+///       display: table;
+///   }
+///
+///   .element > .inner {
+///       display: table-cell;
+///       vertical-align: middle;
+///   }
+///
+@mixin center-td(
+    $inner-selector: '.inner',
+    $horizontal: true
+) {
+
+    @if $horizontal {
+        text-align: center;
+    }
+
+    display: table;
+
+    & > #{$inner-selector} {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+}
+
+
+
+
+
+/// 单行截取文字，添加『...』结尾
+///
+/// @param {Number | String} $width [100%] - 最大宽度，CSS长度，包括calc方法定义的表达式
+///
+/// @example scss - 使用
+///   .element {
+///     @include ellipsis;
+///   }
+///
+@mixin ellipsis($width: 100%) {
+  display: inline-block;
+  max-width: $width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+/// 多行截取文字，添加『...』结尾
+///
+/// @param {Number | String} $line-height [1.2em] - 行高
+/// @param {Number} $line-count [2] - 行数, 超出行数开始截取
+/// @param {Color} $bg-color [#fff] - 文本背景色
+///
+/// @example scss - 使用
+///   .element {
+///     @include multi-line-ellipsis(1.2em, 3, #fff);
+///   }
+///
+@mixin multi-line-ellipsis(
+  $line-height: 1.2em,
+  $line-count: 2,
+  $bg-color: #fff
+) {
+  overflow: hidden;
+  position: relative;
+  line-height: $line-height;
+  max-height: $line-height * $line-count;
+  text-align: justify;
+  padding-right: 0em;
+
+  &:before {
+      content: '...';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background: $bg-color;
+  }
+
+  &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      width: 1em;
+      height: 1em;
+      margin-top: 0.2em;
+      background: $bg-color;
+  }
+}
+
+
+// 三角型生成器(8种形态)
+//
+// @param {Number | List} $size
+//   三角形尺寸
+//   传入一个参数，生成等宽高三角形；传入数组且长度为2，第一个设置宽度，第二个设置高度
+//
+// @param {String | List} $color
+//   传入一个参数，设置三角形颜色；传入数组且长度为2，第一个设置三角形颜色，第二个设置背景色
+//
+// @param {String} $direction
+//   三角形朝向，可传参数：up | down | right | left | up-right | up-left | down-right | down-left | inset-up | inset-down | inset-left | inset-right
+//
+// @example scss - 使用
+//   .element {
+//     &:before {
+//       content: " ";
+//       @include triangle(100px 200px, blue, up);
+//     }
+//   }
+//
+//
+@mixin triangle($size, $color, $direction) {
+  $width: nth($size, 1);
+  $height: nth($size, length($size));
+  $foreground-color: nth($color, 1);
+  $background-color: if(length($color) == 2, nth($color, 2), transparent);
+  height: 0;
+  width: 0;
+
+  @if ($direction == up) or ($direction == down) or ($direction == right) or ($direction == left) {
+      $width: $width / 2;
+      $height: if(length($size) > 1, $height, $height/2);
+
+      @if $direction == up {
+          border-bottom: $height solid $foreground-color;
+          border-left: $width solid $background-color;
+          border-right: $width solid $background-color;
+      } @else if $direction == right {
+          border-bottom: $width solid $background-color;
+          border-left: $height solid $foreground-color;
+          border-top: $width solid $background-color;
+      } @else if $direction == down {
+          border-left: $width solid $background-color;
+          border-right: $width solid $background-color;
+          border-top: $height solid $foreground-color;
+      } @else if $direction == left {
+          border-bottom: $width solid $background-color;
+          border-right: $height solid $foreground-color;
+          border-top: $width solid $background-color;
+      }
+  } @else if ($direction == up-right) or ($direction == up-left) {
+      border-top: $height solid $foreground-color;
+
+      @if $direction == up-right {
+          border-left: $width solid $background-color;
+      } @else if $direction == up-left {
+          border-right: $width solid $background-color;
+      }
+  } @else if ($direction == down-right) or ($direction == down-left) {
+      border-bottom: $height solid $foreground-color;
+
+      @if $direction == down-right {
+          border-left: $width solid $background-color;
+      } @else if $direction == down-left {
+          border-right: $width solid $background-color;
+      }
+  } @else if ($direction == inset-up) {
+      border-color: $background-color $background-color $foreground-color;
+      border-style: solid;
+      border-width: $height $width;
+  } @else if ($direction == inset-down) {
+      border-color: $foreground-color $background-color $background-color;
+      border-style: solid;
+      border-width: $height $width;
+  } @else if ($direction == inset-right) {
+      border-color: $background-color $background-color $background-color $foreground-color;
+      border-style: solid;
+      border-width: $width $height;
+  } @else if ($direction == inset-left) {
+      border-color: $background-color $foreground-color $background-color $background-color;
+      border-style: solid;
+      border-width: $width $height;
+  }
+}
