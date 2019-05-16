@@ -1,7 +1,22 @@
 # 关于项目
 本项目是一个移动端项目的模版。包括一些常用配置及工具等等，让我们能更快速的开始一个新项目。
 
-# 模版内容
+## 运行 & 编译
+```
+yarn
+```
+
+
+```
+yarn dev
+```
+
+```
+yarn build
+```
+
+
+# 项目内容
 
 - [Vue](https://cn.vuejs.org/v2/guide/) 不知道是干嘛的
 - [Vue-Router](https://router.vuejs.org/zh/) 路由
