@@ -1,0 +1,121 @@
+@import "./variables.scss";
+@import "./mixin.scss";
+
+html,
+body,
+div,
+span,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+em,
+img,
+s,
+strong,
+b,
+u,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+time,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+}
+
+/* ios默认文本框阴影 */
+
+input[type="text"],
+textarea {
+  -webkit-appearance: none;
+}
+
+/* 低版本安卓文本框层级问题 */
+
+input:focus {
+  -webkit-user-modify: read-write-plaintext-only;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: 100%;
+  min-height: 100%;
+  width: 100%;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #fff;
+}
+
+a,
+button,
+input {
+  outline: 0 none;
+  text-decoration: none;
+}
+
+img {
+  border: 0 none;
+  vertical-align: bottom;
+  -ms-interpolation-mode: bicubic;
+}
+
+.clear-fix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
