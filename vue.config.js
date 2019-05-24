@@ -38,6 +38,13 @@ module.exports = {
     },
     after: require('./mock/index.js')
   },
+  configureWebpack: {
+    resolve: {
+      alias: { // 别名，例如在项目中  import foo from '@/components/foo' , 就是引入的 'src/components/foo'
+        '@': resolve('src')
+      }
+    }
+  },
   css: {
     loaderOptions: {
       sass: {
