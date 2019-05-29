@@ -8,6 +8,17 @@
     "preview": "node preview/index.js --preview --report",
     "lint": "eslint --ext .js,.vue src"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@nutui/nutui": "^2.1.1",
     "axios": "0.18.0",
@@ -31,6 +42,7 @@
     "connect": "^3.6.6",
     "eslint": "5.15.3",
     "eslint-plugin-vue-libs": "^3.0.0",
+    "husky": "^2.3.0",
     "mockjs": "1.0.1-beta3",
     "node-sass": "^4.9.0",
     "postcss-px-to-viewport": "^1.1.0",
